@@ -49,7 +49,9 @@ let getIMDB = function(birthdate1) {
         })
         .then(function (data) {
             console.log(data);
-    })};
+            localStorage.setItem("imdbArray", JSON.stringify(data));
+        })
+};
 
 let getNYTimes = function(birthdate2) {
     let requestUrl2 = "https://api.nytimes.com/svc/search/v2/articlesearch.json?&begin_date=" + birthdate2 + "&end_date=" + birthdate2 + "&api-key=9lT9Z3cCgK58xioXvJi1qjAjO1r1Etbe";
@@ -60,7 +62,9 @@ let getNYTimes = function(birthdate2) {
         })
         .then(function (data) {
             console.log(data);
-})};
+            localStorage.setItem("nytimesArray", JSON.stringify(data));
+        })
+};
 
 // Launches formSubmitHandler() function
 userInputEl.addEventListener("submit", formSubmitHandler);
