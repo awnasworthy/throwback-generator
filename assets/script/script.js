@@ -68,19 +68,3 @@ let getNYTimes = function(birthdate2) {
 
 // Launches formSubmitHandler() function
 userInputEl.addEventListener("submit", formSubmitHandler);
-
-fetch(requestUrl1)
-    .then(function (response) {
-        return response.json();
-    })
-    .then(function (data) {
-        console.log(data);
-    });
-fetch(requestUrl2)
-    .then(function (response) {
-        return response.json();
-    })
-    .then(function (data) {
-        console.log(data);
-    });
-});
