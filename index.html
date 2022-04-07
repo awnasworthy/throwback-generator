@@ -5,23 +5,39 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Throwback Generator</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/css/foundation.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
 <body>
     <header>
-        <h1>Welcome to the Throwback Generator</h1>
+        <div class="container-fluid p-5">
+        <div class="row">
+        <div class="col"><h1>The Throwback Generator</h1></div>
+        <div class="col"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis porro voluptate libero maiores doloribus reprehenderit voluptas eos, explicabo facere alias doloremque blanditiis officiis incidunt ad cumque culpa perspiciatis quod ratione.</p></div>
+        </div>
+        </div>
     </header>
-    <div>
-        <h2>Enter Your Birthday</h2>
-        <input form="Birthday" type="date">
+    <div class="card text-center birthday" style="width: 18rem;">
+        <div class="card-title">
+            <h2>Enter Your Birthday</h2>
+            </div>
+            <div class="card-text">
+            <input form="Birthday" type="date">
+            </div>
+            </div>
+
+    <div class="container-fluid p-5">
+    <div class="row">
+    <div class="col-6">
+        <p>This is a placeholder for NEWS</p>
     </div>
-    <div>
-        <p>This is a placeholder for ALBUMS</p>
-    </div>
-    <div>
+    <div class="col-6">
         <p>This is a placeholder for MOVIES</p>
     </div>
+    </div>
+    </div>
+
+
 <!--Link Script-->
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>    
 <script src="./assets/script/script.js"></script>
