@@ -21,3 +21,7 @@ margin-left: 50px;
 .card-int {
     padding: 10px;
 }
+
+#submit-btn:hover, #birthdate-input:hover {
+    background-color: whitesmoke;
+}
