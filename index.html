@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Throwback Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
@@ -12,34 +13,41 @@
     <header>
         <div class="container-fluid p-5">
         <div class="row">
-        <div class="col"><h1>The Throwback Generator</h1></div>
-        <div class="col"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis porro voluptate libero maiores doloribus reprehenderit voluptas eos, explicabo facere alias doloremque blanditiis officiis incidunt ad cumque culpa perspiciatis quod ratione.</p></div>
+        <div class="col"><h1><i class="bi bi-skip-backward"></i> The Throwback Generator <i class="bi bi-skip-backward"></i></h1></div>
+        <div class="col"><p>A totally groovy way to see what radical movies were released, what hip albums were dropped, and what way-out news headlines were popular the year you were born!</p></div>
         </div>
         </div>
     </header>
+    <div class="birthday">
     <div class="card text-center birthday" style="width: 18rem;">
         <div class="card-title">
             <h2>Enter Your Birthday</h2>
             </div>
             <div class="card-text">
+            <div class="card-int">
             <form id="user-form">
             <input name="birthdate-input" type="date" id="birthdate-input">
+            </div>
+            <div class="card-int">
             <button type="submit" id="submit-btn">Let's throwback!</button>
+            </div>
             </form>
             </div>
             </div>
+            </div>
 
-    <div id="news">
+    <div class="display" id="news">
         <p>This is a placeholder for NEWS.</p>
     </div>
 
-    <div id="albums">
+    <div class="display" id="albums">
         <p>This is a placeholder for ALBUMS.</p>
     </div>
 
-    <div id="movies">
+    <div class="display" id="movies">
         <p>This is a placeholder for MOVIES.</p>
     </div>
+
 
 
 <!--Link Script-->
