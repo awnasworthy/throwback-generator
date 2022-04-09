@@ -4,6 +4,10 @@ let newsContainerEl = document.querySelector("#news");
 let moviesContainerEl = document.querySelector("#movies");
 let musicContainerEl = document.querySelector("#albums");
 
+let newsArray = [];
+let musicArray = [];
+let movieArray = [];
+
 
 let formSubmitHandler = function(event) {
     event.preventDefault();
@@ -25,7 +29,6 @@ let getIMDB = function(birthdate1) {
         .then(function (data) {
             // console.log(data);
             createMovies(data);
-            localStorage.setItem("imdbArray", JSON.stringify(data));
         })
 };
 
@@ -40,7 +43,6 @@ let getNYTimes = function(birthdate2) {
         .then(function (data) {
             // console.log(data);
             createNews(data);
-            localStorage.setItem("nytimesArray", JSON.stringify(data));
         })
 };
 
@@ -67,14 +69,24 @@ let createMovies = function(data) {
         var movies = results[Math.floor(Math.random() * results.length)]
         movieList.push(movies);
 
+        var title = movieList[i].title;
+        var plot = movieList[i].plot;
+
         // create the elements to hosue the data
         var movieEl = document.createElement('div');
         // movieEl.classList = "CLASS_PLACEHOLDER";
-        movieEl.innerText = movieList[i].title;
+        movieEl.innerHTML = "<h4>" + title + "</h4> <p>" + plot + "</p>";
+
+        // add muisc items to array to store
+        movieArray.push({
+            title: title,
+            plot: plot
+        });
 
         moviesContainerEl.appendChild(movieEl);
     }
-    console.log(movieList);
+    console.log(movieArray);
+    localStorage.setItem("Movies", JSON.stringify(movieArray));
 };
 
 
@@ -90,9 +102,17 @@ let createNews = function(data) {
     // newsEl.classList = "CLASS_PLACEHOLDER";
     newsEl.innerHTML = "<h4>" + headline + "</h4> <p>" + abstract + "</p>";
 
+    // add news items to array to store
+    newsArray.push({
+        headline: headline,
+        abstract: abstract
+    });
+
     newsContainerEl.appendChild(newsEl);
-    }
-    console.log(docs);
+    };
+    console.log(newsArray);
+    // save newsArray to local storage
+    localStorage.setItem("News", JSON.stringify(newsArray));
 };
 
 
@@ -112,9 +132,17 @@ let createMusic = function(data) {
         // newsEl.classList = "CLASS_PLACEHOLDER";
         musicEl.innerHTML = "<h4>" + name + "</h4> <p>" + title + "</p>";
 
+        // add muisc items to array to store
+        musicArray.push({
+            name: name,
+            title: title
+        });
+
         musicContainerEl.appendChild(musicEl);
     }
-    console.log(albums);
+    console.log(musicArray);
+    // save newsArray to local storage
+    localStorage.setItem("Music", JSON.stringify(musicArray));
 };
 
 
