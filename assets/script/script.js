@@ -67,51 +67,54 @@ let createMovies = function(data) {
         var movies = results[Math.floor(Math.random() * results.length)]
         movieList.push(movies);
 
+        // create the elements to hosue the data
         var movieEl = document.createElement('div');
         // movieEl.classList = "CLASS_PLACEHOLDER";
         movieEl.innerText = movieList[i].title;
 
         moviesContainerEl.appendChild(movieEl);
     }
-        
+    console.log(movieList);
 };
 
 
 let createNews = function(data) {
     var docs = data.response.docs;
-    
+    // loop through array of data and randomly select news articles
     for (var i = 0; i < docs.length; i++) {
     var headline = data.response.docs[i].headline.main;
     var abstract = data.response.docs[i].abstract;
 
+    // create the elements to house the data
     var newsEl = document.createElement('div');
     // newsEl.classList = "CLASS_PLACEHOLDER";
     newsEl.innerHTML = "<h4>" + headline + "</h4> <p>" + abstract + "</p>";
 
     newsContainerEl.appendChild(newsEl);
     }
+    console.log(docs);
 };
 
 
 let createMusic = function(data) {
     var recordings = data.recordings;
-    console.log(recordings);
     var albums = [];
+    // loop through array of data and randomly select 10 albums
     for (var i = 0; i < 10; i++) {
         var album = recordings[Math.floor(Math.random() * recordings.length)]
         var title = album.title;
-        // console.log(title);
         var name = album["artist-credit"][0].name;
-        // console.log(name);
-        // var recording = album.filter(title => title != 'undefined');
-        albums.push(title);
+        // push the randomly selected index into a new empty array   
+        albums.push(album);
 
+        // create the elements to house the data
         var musicEl = document.createElement('div');
         // newsEl.classList = "CLASS_PLACEHOLDER";
-        musicEl.innerHTML = "<h4>" + name + "</h4> <p>" + albums + "</p>";
+        musicEl.innerHTML = "<h4>" + name + "</h4> <p>" + title + "</p>";
 
         musicContainerEl.appendChild(musicEl);
     }
+    console.log(albums);
 };
 
 
