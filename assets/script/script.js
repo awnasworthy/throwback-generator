@@ -28,7 +28,10 @@ let getIMDB = function(birthdate1) {
         })
         .then(function (data) {
             // console.log(data);
+            // var results = data.results;
             createMovies(data);
+            // localStorage.setItem("movieData", JSON.stringify(results));
+            
         })
 };
 
@@ -42,7 +45,9 @@ let getNYTimes = function(birthdate2) {
         })
         .then(function (data) {
             // console.log(data);
+            // var response = data.response.docs;
             createNews(data);
+            // localStorage.setItem("newsData", JSON.stringify(response));
         })
 };
 
@@ -54,6 +59,7 @@ var getMusic = function(birthdate1) {
         .then(function(response) {
             if (response.ok) {
                 response.json().then(function(data) {
+                    // console.log(data);
                     createMusic(data);
                 });
             }
@@ -72,6 +78,13 @@ let createMovies = function(data) {
         var title = movieList[i].title;
         var plot = movieList[i].plot;
 
+        appendMovie(title, plot);
+    }
+    console.log(movieArray);
+    localStorage.setItem("Movies", JSON.stringify(movieArray));
+};
+
+let appendMovie = function(title, plot) {
         // create the elements to hosue the data
         var movieEl = document.createElement('div');
         // movieEl.classList = "CLASS_PLACEHOLDER";
@@ -84,19 +97,28 @@ let createMovies = function(data) {
         });
 
         moviesContainerEl.appendChild(movieEl);
-    }
-    console.log(movieArray);
-    localStorage.setItem("Movies", JSON.stringify(movieArray));
-};
+    };
+    
 
 
 let createNews = function(data) {
-    var docs = data.response.docs;
+    // console.log(data);
+    var response = data.response.docs;
+    // console.log(response);
     // loop through array of data and randomly select news articles
-    for (var i = 0; i < docs.length; i++) {
-    var headline = data.response.docs[i].headline.main;
-    var abstract = data.response.docs[i].abstract;
+    for (var i = 0; i < response.length; i++) {
+    var headline = response[i].headline.main;
+    var abstract = response[i].abstract;
+    // console.log(headline);
+    appendNews(headline, abstract);
+    };
 
+    console.log(newsArray);
+    // save newsArray to local storage
+    localStorage.setItem("News", JSON.stringify(newsArray));
+};
+
+let appendNews = function(headline, abstract) {
     // create the elements to house the data
     var newsEl = document.createElement('div');
     // newsEl.classList = "CLASS_PLACEHOLDER";
@@ -109,24 +131,28 @@ let createNews = function(data) {
     });
 
     newsContainerEl.appendChild(newsEl);
-    };
-    console.log(newsArray);
-    // save newsArray to local storage
-    localStorage.setItem("News", JSON.stringify(newsArray));
 };
+    
 
 
 let createMusic = function(data) {
     var recordings = data.recordings;
-    var albums = [];
+    // var albums = [];
     // loop through array of data and randomly select 10 albums
     for (var i = 0; i < 10; i++) {
         var album = recordings[Math.floor(Math.random() * recordings.length)]
         var title = album.title;
         var name = album["artist-credit"][0].name;
         // push the randomly selected index into a new empty array   
-        albums.push(album);
+        // albums.push(album);
+        appendMusic(name, title);
+    }
+    console.log(musicArray);
+    // save newsArray to local storage
+    localStorage.setItem("Music", JSON.stringify(musicArray));
+};
 
+let appendMusic = function(name, title) {
         // create the elements to house the data
         var musicEl = document.createElement('div');
         // newsEl.classList = "CLASS_PLACEHOLDER";
@@ -139,11 +165,47 @@ let createMusic = function(data) {
         });
 
         musicContainerEl.appendChild(musicEl);
+    };
+   
+
+
+var loadData = function() {
+    movies = JSON.parse(localStorage.getItem("Movies"));
+    music = JSON.parse(localStorage.getItem("Music"));
+    news = JSON.parse(localStorage.getItem("News"));
+
+    if (!movies || !music || !news) {
+        return false;
+    } else {
+        console.log(movies);
+        console.log(music);
+        console.log(news);
+        for (var i = 0; i < movies.length; i++) {
+            var title = movies[i].title;
+            var plot = movies[i].plot;
+            appendMovie(title, plot);
+        };
+        for (var i = 0; i < music.length; i++) {
+            var name = music[i].name;
+            var title = music[i].title;
+            appendMusic(name, title);
+        };
+        for (var i = 0; i < news.length; i++) {
+            var headline = news[i].headline;
+            var abstract = news[i].abstract;
+            appendNews(headline, abstract);
+        };
     }
-    console.log(musicArray);
-    // save newsArray to local storage
-    localStorage.setItem("Music", JSON.stringify(musicArray));
+    // then loop over sub-array
+    // arr.forEach(function(task) {
+    //   createTask(task.text, task.date, list);
+    // });
+//   });
 };
+    
+
+
+loadData();
 
 
 // Launches formSubmitHandler() function
