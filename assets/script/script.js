@@ -13,6 +13,10 @@ let formSubmitHandler = function(event) {
     event.preventDefault();
     let birthdate1 = birthdateInputEl.value.slice(0, 4);
     let birthdate2 = birthdateInputEl.value.replaceAll('-', '');
+    newsContainerEl.textContent = "";
+    musicContainerEl.textContent = "";
+    moviesContainerEl.textContent = "";
+    localStorage.clear();
     getIMDB(birthdate1);
     getNYTimes(birthdate2);
     getMusic(birthdate1);
@@ -27,11 +31,7 @@ let getIMDB = function(birthdate1) {
             return response.json();
         })
         .then(function (data) {
-            // console.log(data);
-            // var results = data.results;
             createMovies(data);
-            // localStorage.setItem("movieData", JSON.stringify(results));
-            
         })
 };
 
@@ -44,10 +44,7 @@ let getNYTimes = function(birthdate2) {
             return response.json();
         })
         .then(function (data) {
-            // console.log(data);
-            // var response = data.response.docs;
             createNews(data);
-            // localStorage.setItem("newsData", JSON.stringify(response));
         })
 };
 
@@ -59,7 +56,6 @@ var getMusic = function(birthdate1) {
         .then(function(response) {
             if (response.ok) {
                 response.json().then(function(data) {
-                    // console.log(data);
                     createMusic(data);
                 });
             }
@@ -80,8 +76,8 @@ let createMovies = function(data) {
 
         appendMovie(title, plot);
     }
-    console.log(movieArray);
-    localStorage.setItem("Movies", JSON.stringify(movieArray));
+    console.log(movieList);
+    localStorage.setItem("Movies", JSON.stringify(movieList));
 };
 
 let appendMovie = function(title, plot) {
@@ -102,20 +98,18 @@ let appendMovie = function(title, plot) {
 
 
 let createNews = function(data) {
-    // console.log(data);
     var response = data.response.docs;
     // console.log(response);
     // loop through array of data and randomly select news articles
     for (var i = 0; i < response.length; i++) {
     var headline = response[i].headline.main;
     var abstract = response[i].abstract;
-    // console.log(headline);
     appendNews(headline, abstract);
     };
 
-    console.log(newsArray);
+    console.log(response);
     // save newsArray to local storage
-    localStorage.setItem("News", JSON.stringify(newsArray));
+    localStorage.setItem("News", JSON.stringify(response));
 };
 
 let appendNews = function(headline, abstract) {
@@ -137,19 +131,22 @@ let appendNews = function(headline, abstract) {
 
 let createMusic = function(data) {
     var recordings = data.recordings;
-    // var albums = [];
+    var musicList = [];
     // loop through array of data and randomly select 10 albums
     for (var i = 0; i < 10; i++) {
         var album = recordings[Math.floor(Math.random() * recordings.length)]
-        var title = album.title;
-        var name = album["artist-credit"][0].name;
-        // push the randomly selected index into a new empty array   
-        // albums.push(album);
+        // push the randomly selected index into a new empty array
+        musicList.push(album);
+
+        var name = musicList[i]['artist-credit'][0].name;
+        var title = musicList[i].title;
+        // console.log(musicList);
+        
         appendMusic(name, title);
     }
-    console.log(musicArray);
+    console.log(musicList);
     // save newsArray to local storage
-    localStorage.setItem("Music", JSON.stringify(musicArray));
+    localStorage.setItem("Music", JSON.stringify(musicList));
 };
 
 let appendMusic = function(name, title) {
@@ -180,13 +177,14 @@ var loadData = function() {
         console.log(movies);
         console.log(music);
         console.log(news);
+        
         for (var i = 0; i < movies.length; i++) {
             var title = movies[i].title;
             var plot = movies[i].plot;
             appendMovie(title, plot);
         };
         for (var i = 0; i < music.length; i++) {
-            var name = music[i].name;
+            var name = music[i]['artist-credit'][0].name;
             var title = music[i].title;
             appendMusic(name, title);
         };
@@ -196,15 +194,10 @@ var loadData = function() {
             appendNews(headline, abstract);
         };
     }
-    // then loop over sub-array
-    // arr.forEach(function(task) {
-    //   createTask(task.text, task.date, list);
-    // });
-//   });
 };
     
 
-
+// loads data that's saved in local storage
 loadData();
 
 
