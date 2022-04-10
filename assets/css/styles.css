@@ -25,3 +25,8 @@ margin-left: 50px;
 #submit-btn:hover, #birthdate-input:hover {
     background-color: whitesmoke;
 }
+
+.headline {
+    font-size: 50px;
+    font-weight: bold;
+}
