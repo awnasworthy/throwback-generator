@@ -99,7 +99,6 @@ let appendMovie = function(title, plot) {
 
 let createNews = function(data) {
     var response = data.response.docs;
-    // console.log(response);
     // loop through array of data and randomly select news articles
     for (var i = 0; i < response.length; i++) {
     var headline = response[i].headline.main;
@@ -189,7 +188,7 @@ var loadData = function() {
             appendMusic(name, title);
         };
         for (var i = 0; i < news.length; i++) {
-            var headline = news[i].headline;
+            var headline = news[i].headline.main;
             var abstract = news[i].abstract;
             appendNews(headline, abstract);
         };
